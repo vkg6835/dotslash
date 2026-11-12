@@ -6,13 +6,13 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    default: 'RoadLens | Road damage audit demo',
+    default: 'RoadLens | SMC Command Center',
     template: '%s | RoadLens',
   },
-  description: 'Explore recorded YOLO road-damage detections, annotated footage, and maintenance priorities. Built by Vishal Gautam.',
+  description: 'Explore the RoadLens SMC Command Center with recorded YOLO road-damage detections, a map, annotated footage, and maintenance priorities. Built by Vishal Gautam.',
   openGraph: {
-    title: 'RoadLens | See road damage. Know what to fix first.',
-    description: 'An interactive road audit demo with recorded computer vision results and maintenance priorities.',
+    title: 'RoadLens | SMC Command Center',
+    description: 'A read-only command center with recorded road-damage detections, an interactive map, and a maintenance triage queue.',
     type: 'website',
   },
 };

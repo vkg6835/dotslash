@@ -2,7 +2,7 @@
 
 RoadLens connects recorded road-damage detections to a map, annotated video, and maintenance queue. Built by Vishal Gautam at SVNIT Surat.
 
-The public demo runs without a database, login, or environment variables. It uses recorded YOLOv8 predictions. Map coordinates, traffic counts, and severity estimates illustrate the repair workflow.
+The public demo runs without a database, login, or environment variables. It follows the original SMC Command Center layout: incident metrics and the large map on the left, with severity, state, area, Smart Triage, and Fleet Diagnostics panels on the right. It uses recorded YOLOv8 predictions. Map coordinates, traffic counts, fleet telemetry, and severity estimates illustrate the repair workflow.
 
 ## Run locally
 
@@ -26,9 +26,13 @@ npm start
 
 - Select a marker or review row to inspect its frame, confidence, severity estimate, traffic, and priority.
 - Play the annotated recording from the start or jump to a selected detection.
-- Filter by damage type, minimum confidence, sample ID, or segment.
+- Filter by minimum severity, route segment, damage type, minimum confidence, or sample ID. Gujarat is the only state represented by the simulated coordinates.
 - Sort by priority, severity, confidence, or recording time.
 - Export the filtered review samples, or download the full recorded detection CSV.
+
+The original staff dashboard source remains in [src/app/dashboard/page.tsx](src/app/dashboard/page.tsx); its saved screenshots are [docs/image copy.png](docs/image%20copy.png) and [docs/image.png](docs/image.png). The public demo uses the same black theme, three metric cards, map severity colors, sidebar, and preventive-maintenance panel. The annotated replay and recorded sample table appear below the main map. It replaces live upload and delete actions with local CSV downloads for a read-only review.
+
+The replay has no early-crack class or repair confirmations, so ML Crack Detection and weekly repairs are labelled unavailable. Surface damage is not relabelled as an early crack. Fleet Diagnostics reuses the original project's five-bus mock snapshot with explicit simulated labels; it is not live telemetry.
 
 The replay and images are included in [public/demo](public/demo). Serving the demo does not run Python or model inference. The basemap uses CARTO and OpenStreetMap tiles and needs an internet connection.
 

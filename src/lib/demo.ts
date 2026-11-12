@@ -41,6 +41,8 @@ export type DemoSort = 'priority' | 'severity' | 'confidence' | 'time';
 export interface DemoFilters {
   kind: 'all' | DamageKind;
   minConfidence: number;
+  minSeverity?: number;
+  segment?: string;
   query: string;
   sort: DemoSort;
 }
@@ -66,6 +68,8 @@ export function filterDetections(samples: DemoDetection[], filters: DemoFilters)
       const searchable = [sample.id, sample.segment, damageLabel(sample.kind), sample.modelClass].join(' ').toLowerCase();
       return (filters.kind === 'all' || sample.kind === filters.kind) &&
         sample.confidence >= filters.minConfidence &&
+        sample.severity >= (filters.minSeverity ?? 0) &&
+        (!filters.segment || sample.segment === filters.segment) &&
         (!query || searchable.includes(query));
     })
     .sort((left, right) => {
