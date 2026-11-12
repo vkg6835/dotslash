@@ -1,6 +1,6 @@
 # RoadLens
 
-RoadLens connects recorded road-damage detections to a map, annotated video, and maintenance queue. Built by Vishal Gautam at SVNIT Surat.
+RoadLens connects recorded road-damage detections to a map, annotated video, and maintenance queue.
 
 The public demo runs without a database, login, or environment variables. It follows the original SMC Command Center layout: incident metrics and the large map on the left, with severity, state, area, Smart Triage, and Fleet Diagnostics panels on the right. It uses recorded YOLOv8 predictions. Map coordinates, traffic counts, fleet telemetry, and severity estimates illustrate the repair workflow.
 
