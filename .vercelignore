@@ -5,7 +5,7 @@ node_modules
 .venv*
 src/scripts
 docs
-detections.csv
+/detections.csv
 *.log
 *.tsbuildinfo
 .env*
