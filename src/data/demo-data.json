@@ -1,0 +1,264 @@
+{
+  "source": {
+    "video": "/demo/roadlens-replay.mp4",
+    "poster": "/demo/replay-poster.jpg",
+    "fullCsv": "/demo/detections.csv",
+    "recordingName": "inputvideo3.mp4",
+    "modelName": "YOLOv8",
+    "modelFile": "best.pt",
+    "width": 1920,
+    "height": 1200,
+    "fps": 27.56614916905487,
+    "durationSeconds": 39.977,
+    "frameCount": 1102,
+    "detectionFrameCount": 700,
+    "detectionCount": 1492,
+    "classCounts": {
+      "other corruption": 581,
+      "pothole": 911
+    },
+    "coordinatesAreSimulated": true
+  },
+  "samples": [
+    {
+      "id": "RL-001",
+      "frame": 10,
+      "timestampSeconds": 0.326,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.407334,
+      "box": {
+        "x1": 1383,
+        "y1": 801,
+        "x2": 1801,
+        "y2": 995
+      },
+      "lat": 21.16713627641256,
+      "lng": 72.78523627641263,
+      "severity": 54,
+      "busesPerDay": 120,
+      "segment": "Segment 1",
+      "image": "/demo/samples/RL-001.jpg"
+    },
+    {
+      "id": "RL-002",
+      "frame": 107,
+      "timestampSeconds": 3.845,
+      "kind": "surface_damage",
+      "modelClass": "other corruption",
+      "confidence": 0.636671,
+      "box": {
+        "x1": 63,
+        "y1": 454,
+        "x2": 283,
+        "y2": 512
+      },
+      "lat": 21.167488157614375,
+      "lng": 72.78558815761514,
+      "severity": 33,
+      "busesPerDay": 80,
+      "segment": "Segment 1",
+      "image": "/demo/samples/RL-002.jpg"
+    },
+    {
+      "id": "RL-003",
+      "frame": 218,
+      "timestampSeconds": 7.872,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.527273,
+      "box": {
+        "x1": 991,
+        "y1": 838,
+        "x2": 1578,
+        "y2": 1041
+      },
+      "lat": 21.167890825793773,
+      "lng": 72.78599082579532,
+      "severity": 61,
+      "busesPerDay": 180,
+      "segment": "Segment 1",
+      "image": "/demo/samples/RL-003.jpg"
+    },
+    {
+      "id": "RL-004",
+      "frame": 291,
+      "timestampSeconds": 10.52,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.462666,
+      "box": {
+        "x1": 678,
+        "y1": 823,
+        "x2": 1373,
+        "y2": 1082
+      },
+      "lat": 21.16815564360545,
+      "lng": 72.78625564360752,
+      "severity": 70,
+      "busesPerDay": 90,
+      "segment": "Segment 1",
+      "image": "/demo/samples/RL-004.jpg"
+    },
+    {
+      "id": "RL-005",
+      "frame": 441,
+      "timestampSeconds": 15.962,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.607097,
+      "box": {
+        "x1": 1406,
+        "y1": 947,
+        "x2": 1755,
+        "y2": 1140
+      },
+      "lat": 21.168699789793823,
+      "lng": 72.78679978979696,
+      "severity": 51,
+      "busesPerDay": 150,
+      "segment": "Segment 2",
+      "image": "/demo/samples/RL-005.jpg"
+    },
+    {
+      "id": "RL-006",
+      "frame": 486,
+      "timestampSeconds": 17.594,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.405885,
+      "box": {
+        "x1": 5,
+        "y1": 718,
+        "x2": 612,
+        "y2": 1059
+      },
+      "lat": 21.168863033650336,
+      "lng": 72.78696303365379,
+      "severity": 74,
+      "busesPerDay": 240,
+      "segment": "Segment 2",
+      "image": "/demo/samples/RL-006.jpg"
+    },
+    {
+      "id": "RL-007",
+      "frame": 576,
+      "timestampSeconds": 20.859,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.737037,
+      "box": {
+        "x1": 154,
+        "y1": 610,
+        "x2": 521,
+        "y2": 750
+      },
+      "lat": 21.16918952136336,
+      "lng": 72.78728952136746,
+      "severity": 47,
+      "busesPerDay": 70,
+      "segment": "Segment 2",
+      "image": "/demo/samples/RL-007.jpg"
+    },
+    {
+      "id": "RL-008",
+      "frame": 675,
+      "timestampSeconds": 24.45,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.278761,
+      "box": {
+        "x1": 478,
+        "y1": 722,
+        "x2": 1291,
+        "y2": 1023
+      },
+      "lat": 21.169548657847688,
+      "lng": 72.78764865785249,
+      "severity": 79,
+      "busesPerDay": 160,
+      "segment": "Segment 2",
+      "image": "/demo/samples/RL-008.jpg"
+    },
+    {
+      "id": "RL-009",
+      "frame": 824,
+      "timestampSeconds": 29.855,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.370626,
+      "box": {
+        "x1": 24,
+        "y1": 882,
+        "x2": 594,
+        "y2": 1118
+      },
+      "lat": 21.170089176394807,
+      "lng": 72.78818917640066,
+      "severity": 63,
+      "busesPerDay": 110,
+      "segment": "Segment 3",
+      "image": "/demo/samples/RL-009.jpg"
+    },
+    {
+      "id": "RL-010",
+      "frame": 894,
+      "timestampSeconds": 32.395,
+      "kind": "surface_damage",
+      "modelClass": "other corruption",
+      "confidence": 0.511478,
+      "box": {
+        "x1": 1110,
+        "y1": 781,
+        "x2": 1504,
+        "y2": 927
+      },
+      "lat": 21.170343111282715,
+      "lng": 72.78844311128907,
+      "severity": 48,
+      "busesPerDay": 200,
+      "segment": "Segment 3",
+      "image": "/demo/samples/RL-010.jpg"
+    },
+    {
+      "id": "RL-011",
+      "frame": 971,
+      "timestampSeconds": 35.188,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.743989,
+      "box": {
+        "x1": 1422,
+        "y1": 738,
+        "x2": 1665,
+        "y2": 883
+      },
+      "lat": 21.170622439659414,
+      "lng": 72.78872243966632,
+      "severity": 42,
+      "busesPerDay": 130,
+      "segment": "Segment 3",
+      "image": "/demo/samples/RL-011.jpg"
+    },
+    {
+      "id": "RL-012",
+      "frame": 1052,
+      "timestampSeconds": 38.126,
+      "kind": "pothole",
+      "modelClass": "pothole",
+      "confidence": 0.46479,
+      "box": {
+        "x1": 691,
+        "y1": 819,
+        "x2": 1391,
+        "y2": 1127
+      },
+      "lat": 21.170916278601137,
+      "lng": 72.78901627860861,
+      "severity": 75,
+      "busesPerDay": 100,
+      "segment": "Segment 3",
+      "image": "/demo/samples/RL-012.jpg"
+    }
+  ]
+}

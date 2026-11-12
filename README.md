@@ -1,81 +1,87 @@
-# 🛣️ RoadLens: Autonomous Smart City Road Audit System
+# RoadLens
 
-Welcome to **RoadLens**, a full-stack, AI-powered predictive maintenance ecosystem designed for municipal corporations to automatically detect, prioritize, and seamlessly manage road decay before it becomes unmanageable.
+RoadLens connects recorded road-damage detections to a map, annotated video, and maintenance queue. Built by Vishal Gautam at SVNIT Surat.
 
----
+The public demo runs without a database, login, or environment variables. It uses recorded YOLOv8 predictions. Map coordinates, traffic counts, and severity estimates illustrate the repair workflow.
 
-## ⚠️ Problem Statement
-Road maintenance currently relies heavily on manual citizen grievances and slow, expensive physical periodic surveys. By the time a pothole is reported, the structural damage is profound, resulting in high repair costs and public frustration. Furthermore, maintenance crews are often dispatched randomly, sequentially, or politically—rather than being prioritized mathematically based on true public traffic disruption. 
+## Run locally
 
-## ❌ Initial Solutions vs. 🚀 Our Improvisation
+Use Node.js 22 or newer. From the folder containing this README:
 
-**The Standard Approach:** Restricting road management to static grievance web-portals, WhatsApp/Twitter complaint scraping, and standalone manual physical inspections. 
+```sh
+npm ci
+npm run dev
+```
 
-**Our Improvisation:** 
-1. **Passive Edge Tracking**: Instead of buying expensive custom scanning vehicles, we mount standard Raspberry Pi cameras to the dashboards of public transit fleets (like SMC City Buses) that *already* organically drive every single street in the city every day. 
-2. **Offline AI Processing**: The edge devices run a refined YOLOv8 object detection model locally to spot "early longitudinal/alligator cracks" and "potholes," safely batch-syncing them to the cloud only when a mobile 4G network is cleanly available.
-3. **True "Smart" Triage**: The Command Dashboard doesn't just arbitrarily list potholes. We developed an algorithm that multiplies physical **Severity** by the specific **Buses Per Day** (Traffic Density) crossing that exact coordinate. This yields an ultimate *Priority Score*, mathematically guaranteeing crews deploy to the most disruptive anomalies first.
-4. **Live Geocoding**: Utilizes the OpenStreetMap Nominatim reverse-geocoder to auto-magically translate mathematical GPS coordinates to authentic human-readable street profiles (e.g. Udhana, Adajan) during ingestion.
-5. **Radical Transparency**: We provide a Citizen Public Interface that dynamically generates "Regional Health Scores" derived *strictly* from the live real-time AI computer vision pipeline rather than forged dummy data.
+Open [http://localhost:3000](http://localhost:3000). Both `/` and `/demo` show the public demo.
 
----
+For a production preview:
 
-## 💿 Database Architecture (Schemas)
-Built entirely on top of **Supabase (PostgreSQL)**, our remote synchronization schema is relentlessly lightweight:
+```sh
+npm run build
+npm start
+```
 
-### `incidents` (The Anomaly Core)
-Stores the physical road anomalies mapped by the fleet.
-- `id` (uuid): Primary key
-- `lat` / `lng` (float8): Spatial mapping
-- `location_name` (text): Real street address (Nominatim Reverse Geocoded)
-- `type` (text): e.g., `pothole` or `early_crack`
-- `severity_score` (int): Physical damage intensity scale (0-100)
-- `buses_per_day` (int): Public transit frequency marker (Traffic multiplier)
-- `fix_deadline_days` (int): AI-suggested repair deadline
-- `status` (text): `active` or `repaired`
+## Explore the demo
 
-### `fleet` (Hardware Diagnostics)
-Monitors the edge node hardware statuses.
-- `bus_id` (varchar): Unique fleet vehicle marker
-- `status` (varchar): Telemetry states (`synced`, `offline`)
-- `last_sync_time` (timestamp)
+- Select a marker or review row to inspect its frame, confidence, severity estimate, traffic, and priority.
+- Play the annotated recording from the start or jump to a selected detection.
+- Filter by damage type, minimum confidence, sample ID, or segment.
+- Sort by priority, severity, confidence, or recording time.
+- Export the filtered review samples, or download the full recorded detection CSV.
 
----
+The replay and images are included in [public/demo](public/demo). Serving the demo does not run Python or model inference. The basemap uses CARTO and OpenStreetMap tiles and needs an internet connection.
 
-## 🎥 Output Video Demonstration
-Watch the edge system parse, identify, and localize road anomalies sequentially using the locally tuned YOLO Model:
+## What the data represents
 
-<video src="./final_video1.mp4" controls="controls" muted="muted" playsinline="playsinline" style="max-width: 100%;">
-  Your browser does not support the video tag.
-</video>
+The source recording, `inputvideo3.mp4`, contains 1,102 frames over approximately 40 seconds. The CSV contains 1,492 frame-level predictions across 700 frames: 911 pothole predictions and 581 predictions with the original class `other corruption`, shown as “Surface damage” in the demo.
 
-> *Fallback link:* [Click here to view final_video1.mp4](./final_video1.mp4)
+The 12 review samples are selected from successive time windows of that recording. A defect can appear in several frames, so these totals are not counts of unique potholes or independently verified defects. Model confidence is not damage severity.
 
-*(Note: The `final_video1.mp4` asset sits at the root of the repository compiled directly from the pipeline's detection buffer).*
+The Surat coordinates are simulated. They do not establish where the footage was recorded. Bus counts are also simulated. Severity is an illustrative estimate based on the original bounding box:
 
----
+```text
+severity = min(100, round(20 + 180 × sqrt(box area / frame area)))
+priority = severity × simulated buses per day
+```
 
-## 📸 Dashboard & UI Screenshots
-*(Below are placeholder slots. Please drop your finalized screengrabs here before deploying to GitHub!)*
+Real maintenance decisions require camera calibration, deduplication, measured traffic, and field validation. Source classes, confidence scores, and boxes are preserved in [the full CSV](public/demo/detections.csv); the selected samples and recording metadata are in [demo-data.json](src/data/demo-data.json).
 
-### SMC Command Center
-![Command Center Dashboard](./docs/dashboard-mockup.png)
-> *The unified command center highlighting real-time map anomaly scaling, regional filters, the ML Crack Detection Queue, and the math-driven Smart Triage List.*
+## Rebuild the replay assets
 
-### Citizen Transparency Portal
-![Public Citizen Portal](./docs/portal-mockup.png)
-> *The frontend Public Transparency View tracking live, dynamically generated Regional Health percentages powered autonomously by bounding box densities.*
+This is optional. The generated assets are already included. To regenerate them, keep `detections.csv` at the project root and `inputvideo3.mp4` in `src/scripts`, then install the Python dependencies:
 
-### Mobile Edge Output & Platform Views
-![System Interface 1](./docs/image.png)
-![System Interface 2](./docs/image%20copy.png)
-> *Extended views of the Edge AI anomaly identification pipeline and RoadLens internal tracking interface.*
+```sh
+python -m pip install -r src/scripts/requirements-demo.txt
+npm run demo:assets
+```
 
----
+[generateDemoAssets.py](src/scripts/generateDemoAssets.py) validates the recorded boxes against the source video, annotates the frames, creates a browser-compatible H.264 replay, and writes the review dataset and sample images. It does not rerun YOLO inference.
 
-## 🔧 Technical Stack
-- **Frontend / UI**: Next.js 15 (App Router, React 19), Tailwind CSS, Lucide React
-- **Mapping Infrastructure**: React-Leaflet + Stadia Smooth Dark Themes
-- **Backend / Authentication**: Supabase (PostgreSQL)
-- **External Integrations**: Google Sheets API (for Automated Repair Crew Submissions) & Nominatim Geocoding
-- **AI / Edge Automation Scripting**: Python 3.12, Ultralytics YOLOv8, OpenCV 
+## Live portal
+
+The original staff dashboard and citizen portal remain at `/dashboard` and `/portal`. Live pages redirect to `/demo`, and `/api/*` responds with HTTP 503, until live mode is enabled with Supabase credentials.
+
+Copy [.env.example](.env.example) to `.env.local` for live development. Set `ROADLENS_ENABLE_LIVE=true`, `NEXT_PUBLIC_SUPABASE_URL`, and `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Staff login uses Supabase Auth; configure the database schema and row-level security policies before enabling a public deployment. The Google Sheets integration additionally uses `GOOGLE_CLIENT_EMAIL`, `GOOGLE_PRIVATE_KEY`, and `GOOGLE_SHEET_ID`.
+
+Enabling live mode does not change the recorded demo at `/` and `/demo`. The live backend and its access policies need a separate integration review before use with real municipal data.
+
+## Validation
+
+```sh
+npm run typecheck
+npm run lint:demo
+npm run build
+```
+
+`npm run lint` checks the entire repository. It currently reports existing typing and React-rule issues in the legacy live portal and utility scripts. `lint:demo` checks the public demo and routing configuration without suppressing those findings.
+
+## Deploy the public demo
+
+Import this repository into Vercel with the Next.js preset, or run the production build on a Node.js host. No environment variables are needed for the public demo. Keep live mode disabled until its backend is configured and reviewed.
+
+When deploying from a workspace that contains this project as a subfolder, choose `RoadLens` as the root directory. When deploying the repository itself, use the repository root. [.vercelignore](.vercelignore) excludes local scripts, source recordings, development files, and logs from the upload; the generated demo assets remain included.
+
+## Stack
+
+Next.js 16.2.1, React 19, TypeScript, Tailwind CSS 4, React Leaflet, and Lucide. The optional live service uses Supabase and Google Sheets. Replay generation uses Python, OpenCV, and FFmpeg.

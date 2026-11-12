@@ -12,7 +12,7 @@ export default function TopBar({ role }: TopBarProps) {
     <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-black/80 border-b border-white/10 px-6 py-4 flex items-center justify-between">
       <div className="flex items-center gap-3">
         <div className={`w-3 h-3 rounded-full ${isPublic ? 'bg-public_teal' : 'bg-smc_blue'} shadow-[0_0_12px_rgba(255,255,255,0.2)]`} />
-        <Link href={isPublic ? '/' : '/dashboard'} className="text-lg font-bold tracking-tight text-white hover:opacity-80 transition-opacity">
+        <Link href={isPublic ? '/portal' : '/dashboard'} className="text-lg font-bold tracking-tight text-white hover:opacity-80 transition-opacity">
           RoadLens — {isPublic ? 'Public Transparency Portal' : 'SMC Command Center'}
         </Link>
       </div>
