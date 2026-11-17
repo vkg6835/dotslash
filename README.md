@@ -1,13 +1,13 @@
-# 🛣️ RoadLens: Autonomous Smart City Road Audit System
+# RoadLens: Autonomous Smart City Road Audit System
 
 Welcome to **RoadLens**, a full-stack, AI-powered predictive maintenance ecosystem designed for municipal corporations to automatically detect, prioritize, and seamlessly manage road decay before it becomes unmanageable.
 
 ---
 
-## ⚠️ Problem Statement
+## Problem Statement
 Road maintenance currently relies heavily on manual citizen grievances and slow, expensive physical periodic surveys. By the time a pothole is reported, the structural damage is profound, resulting in high repair costs and public frustration. Furthermore, maintenance crews are often dispatched randomly, sequentially, or politically—rather than being prioritized mathematically based on true public traffic disruption. 
 
-## ❌ Initial Solutions vs. 🚀 Our Improvisation
+## Initial Solutions vs. Our Improvisation
 
 **The Standard Approach:** Restricting road management to static grievance web-portals, WhatsApp/Twitter complaint scraping, and standalone manual physical inspections. 
 
@@ -20,7 +20,7 @@ Road maintenance currently relies heavily on manual citizen grievances and slow,
 
 ---
 
-## 💿 Database Architecture (Schemas)
+## Database Architecture (Schemas)
 Built entirely on top of **Supabase (PostgreSQL)**, our remote synchronization schema is relentlessly lightweight:
 
 ### `incidents` (The Anomaly Core)
@@ -42,7 +42,7 @@ Monitors the edge node hardware statuses.
 
 ---
 
-## 🎥 Output Video Demonstration
+## Output Video Demonstration
 Watch the edge system parse, identify, and localize road anomalies sequentially using the locally tuned YOLO Model:
 
 <video src="./final_video1.mp4" controls="controls" muted="muted" playsinline="playsinline" style="max-width: 100%;">
@@ -55,7 +55,7 @@ Watch the edge system parse, identify, and localize road anomalies sequentially 
 
 ---
 
-## 📸 Dashboard & UI Screenshots
+## Dashboard & UI Screenshots
 *(Below are placeholder slots. Please drop your finalized screengrabs here before deploying to GitHub!)*
 
 ### SMC Command Center
@@ -73,7 +73,7 @@ Watch the edge system parse, identify, and localize road anomalies sequentially 
 
 ---
 
-## 🔧 Technical Stack
+## Technical Stack
 - **Frontend / UI**: Next.js 15 (App Router, React 19), Tailwind CSS, Lucide React
 - **Mapping Infrastructure**: React-Leaflet + Stadia Smooth Dark Themes
 - **Backend / Authentication**: Supabase (PostgreSQL)
